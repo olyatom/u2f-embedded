@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include <openssl/obj_mac.h>
 #include <openssl/ecdsa.h>
@@ -88,7 +89,7 @@ void u2f_new_keypair(uint8_t * handle, uint8_t * pubkey)
     {
         if (keypairs[i].key == NULL)
         {
-            keypairs[i].key = C_KEY_new_by_curve_name(NID_X9_62_prime256v1);
+            keypairs[i].key = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
             keypairs[i].handle = i+1;
             break;
         }
@@ -103,7 +104,7 @@ void u2f_new_keypair(uint8_t * handle, uint8_t * pubkey)
 
 uint8_t * u2f_get_attestation_cert()
 {
-
+    return "fjskwjfmn";
 }
 
 int main()

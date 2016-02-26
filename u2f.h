@@ -21,6 +21,7 @@
 #define U2F_APDU_SIZE                       7
 #define U2F_CHALLENGE_SIZE                  32
 #define U2F_APPLICATION_SIZE                32
+#define U2F_KEY_HANDLE_SIZE                 4
 #define U2F_REGISTER_REQUEST_SIZE           (U2F_CHALLENGE_SIZE+U2F_APPLICATION_SIZE)
 #define U2F_MAX_REQUEST_PAYLOAD             (1 + U2F_CHALLENGE_SIZE+U2F_APPLICATION_SIZE + 1 + U2F_KEY_HANDLE_SIZE)
 
@@ -63,7 +64,7 @@ struct u2f_register_request
 };
 
 
-int u2f_request(struct u2f_message* req, struct u2f_message* res);
+void u2f_request(struct u2f_request_apdu* req);
 
 // Command status responses
 #define U2F_SW_NO_ERROR                     0x9000
@@ -73,7 +74,6 @@ int u2f_request(struct u2f_message* req, struct u2f_message* res);
 
 /* IMPLEMENTATION specific functions that must be implemented by user */
 
-#define U2F_KEY_HANDLE_SIZE                 4
 #define U2F_ATTESTATION_HANDLE              ((uint8_t *)"\x00\x00\x00\x00")
 #define U2F_ATTESTATION_CERT_SIZE           10
 
