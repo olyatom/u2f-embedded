@@ -75,7 +75,7 @@ void u2f_request(struct u2f_request_apdu* req);
 /* IMPLEMENTATION specific functions that must be implemented by user */
 
 #define U2F_ATTESTATION_HANDLE              ((uint8_t *)"\x00\x00\x00\x00")
-#define U2F_ATTESTATION_CERT_SIZE           10
+#define U2F_ATTESTATION_CERT_SIZE           374
 
 // callback for u2f to send back response data
 //  @buf data to write back

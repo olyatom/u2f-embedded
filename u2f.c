@@ -32,7 +32,7 @@ void u2f_request(struct u2f_request_apdu * req)
 
 static int16_t u2f_register(struct u2f_register_request * req)
 {
-    uint8_t i[] = {0,U2F_EC_FMT_UNCOMPRESSED};
+    uint8_t i[] = {0x5,U2F_EC_FMT_UNCOMPRESSED};
 
     uint8_t key_handle[U2F_KEY_HANDLE_SIZE];
     uint8_t pubkey[64];
@@ -56,10 +56,14 @@ static int16_t u2f_register(struct u2f_register_request * req)
     u2f_ecdsa_sign((uint8_t*)req, U2F_ATTESTATION_HANDLE);
     u2f_response_writeback(i,2);
     u2f_response_writeback(pubkey,64);
+    printf("\n\n");
     pubkey[0] = U2F_KEY_HANDLE_SIZE;
     u2f_response_writeback(pubkey,1);
     u2f_response_writeback(key_handle,U2F_KEY_HANDLE_SIZE);
-    u2f_response_writeback(u2f_get_attestation_cert(),U2F_ATTESTATION_CERT_SIZE);
+    u2f_response_writeback(u2f_get_attestation_cert(),U2F_ATTESTATION_CERT_SIZE-150);
+    u2f_response_writeback(u2f_get_attestation_cert()+U2F_ATTESTATION_CERT_SIZE,150);
+    printf("\n\n");
+
     u2f_response_writeback((uint8_t*)req, 64);
 
     return U2F_SW_NO_ERROR;
