@@ -1,0 +1,11 @@
+# this udev file should be used with udev 188 and newer
+# typically use file in this location:
+# /etc/udev/rules.d/70-u2f.rules
+
+ACTION!="add|change", GOTO="u2f_end"
+
+# u2f-zero
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="8acf", TAG+="uaccess"
+
+
+LABEL="u2f_end"
